@@ -4,7 +4,9 @@ published by the European Central Bank
 
 https://exchangeratesapi.io/
 
-https://api.exchangeratesapi.io/latest?symbols=USD,GBP
+ https://api.exchangeratesapi.io/latest?base=USD
+
+https://api.exchangeratesapi.io/latest?symbols=USD,GBP,CAD
 
 GET https://api.exchangeratesapi.io/latest HTTP/1.1
 
