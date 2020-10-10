@@ -1,8 +1,15 @@
-$('#addCard').on('keypress', function (event) {
+$(function() {
+
+
+
+
+$('addCard').on('keypress', function (event) {
     if (event.which == 13) {
+        alert('You pressed enter!');
         var cardName = document.querySelector('#addCard').value;
-        console.log(cardName)
+        console.log(cardName);
         displayCard();
+    } 
     }
 });
 //jquery documentation, look into on key press/ on key press event
@@ -13,9 +20,9 @@ function displayCard() {
         url: 'https://api.scryfall.com/cards/named?fuzzy=' + cardName,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
-        console.log(response.prices.usd)
-        console.log(response.image_uris.large)
+        console.log(response);
+        console.log(response.prices.usd);
+        console.log(response.image_uris.large);
         // var cardDiv = $("<div>");
         // cardImage.attr("src", response.image_uris.large);
         // cardDiv.append(cardImage);
@@ -27,3 +34,8 @@ function displayCard() {
 //         alert('You pressed enter!');
 //     }
 // });
+
+
+
+
+});
