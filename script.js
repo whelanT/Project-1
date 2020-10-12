@@ -4,6 +4,7 @@ $(function() {
     var cardValueUSD;
     var cardValueEUR;
     var currency1 = "USD";
+    var deckArray = [];
 
 
 
@@ -28,12 +29,54 @@ $(function() {
             console.log(response.image_uris.large);
             console.log("USD Price is ", response.prices);
             cardValueUSD = response.prices.usd;
+            
+            // user input to array then array to string then to local storage
+            deckArray.push(response.name); 
+            console.log('response.name:', response.name);
+            localStorage.setItem("deckArray", JSON.stringify(deckArray));
+            console.log('deckArray as a string:', deckArray);
+
+            
+            // creating varibales for the info to be shown on the HTML 
+            //indented items show they are affecting the variable above
+            var tableRow = $("<tr>");
+            var tableDataIcon = $('<td width="10 %">');
+                var iTag = $("<i>");
+                iTag.addClass("fab fa-wizards-of-the-coast")
+                tableDataIcon.append(iTag)
+            var tableDataName = $("<td>");
+            var tableDataButton = $("<td>");
+                var aTag = $("<a>");
+                aTag.addClass("button is-small is-primary grad");
+                aTag.text("Select");
+                //did not add href to the button - would not know where to point it
+            tableDataButton.addClass("level-right");
+            tableDataButton.append(aTag);
+            // Moving items from the local storage to the html 
+            tableDataName.text(response.name);
+            tableRow.append(tableDataIcon,tableDataName,tableDataButton);
+            $('#tableBody').prepend(tableRow);
+
+
+            // HTML code for reference 
+                // <tr>
+                //     <td width="10%"><i class="fab fa-wizards-of-the-coast"></i></td>
+                //     <td>Card Name Here</td>
+                //     <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                // </tr>
+
+
+
+
             // var cardDiv = $("<div>");
             // cardImage.attr("src", response.image_uris.large);
             // cardDiv.append(cardImage);
             //console.log(response.prices.usd) dot notation for price
             currencyConvert();
-            })
+            }).catch(function(error){
+            console.log('error:', error)
+            console.log('error details:', error.responseJSON.details)
+            });
     }
 
 // https://api.exchangeratesapi.io/latest?base=USD
