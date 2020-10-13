@@ -15,7 +15,9 @@
 </head>
 
 <body>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
     <!-- START NAV -->
     <nav class="navbar">
         <div class="container">
@@ -45,7 +47,7 @@
                     <div class="field">
                       <label class="label">Card Search</label>
                       <div class="control">
-                        <input class="input" type="text" placeholder="Card Name">
+                        <input class="input" type="text" placeholder="Card Name" id = "addCard">
                       </div>
                     </div>
                     <p class="menu-label">
@@ -182,8 +184,8 @@
                         </div>
                     </div>
                     <div class="column is-6">
-                      <div class="image">
-                        <img src="https://images-na.ssl-images-amazon.com/images/I/510j5z9%2BxuL._AC_.jpg">
+                      <div class="image" id = "cardImage">
+                        <img src="https://images-na.ssl-images-amazon.com/images/I/510j5z9%2BxuL._AC_.jpg" id = "img">
                       </div>
                         <!-- <div class="card">
                             <header class="card-header">
@@ -240,7 +242,7 @@
             </div>
         </div>
     </div>
-    <script async type="text/javascript" src="../js/bulma.js"></script>
+  <script src = "script.js"></script>
 </body>
 
 </html>
