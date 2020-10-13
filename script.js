@@ -1,3 +1,4 @@
+$(function() {
 
 //add card to the search field, 
 $('#addCard').on('keypress', function(event){
@@ -23,25 +24,30 @@ function displayCard(){
         console.log(newImg)
         $('#img').attr('src', newImg);
 
-        // $('#logo').attr('src', '/images/new-logo.jpg');
-        //something like this??
-        // $("#addImg").click(function() {
-
-            
-            //  console.log(newImg)
-        //     newImg.css({left: xCoor, top: yCoor});
-        //     $("div").append(newImg);
-        // });
-      
-        //console.log(response.prices.usd) dot notation for price
+        $('.othr').remove();
+        $('.pthr').remove();
+        $('.name').replaceWith('<h2 class="name">' + response.name + '</h2>');
+        $('.cost').replaceWith('<p class="cost">' + response.mana_cost + '</p>');
+        $('.cardType').replaceWith('<p class="cardType">' + response.type_line + '</p>');
+        if (response.oracle_text != null) {
+        $('.oracleText').replaceWith('<hr class="rounded othr"><p class="oracleText">' + response.oracle_text + '</p>');
+        } else {
+            $('.oracleText').replaceWith('<p class="oracleText"></p>');
+        }
+        if (response.power != null) {
+            $('.powerToughness').replaceWith('<hr class="rounded pthr"><p class="powerToughness">' + response.power + '/' + response.toughness + '</p>');
+            } else {
+            $('.powerToughness').replaceWith('<p class="powerToughness"></p>');
+            }
+        if (response.prices.usd != null) {
+        $('.price').replaceWith('<p class="price">$' + response.prices.usd + '</p>');
+        } else {
+        $('.price').replaceWith('<p class="price"></p>');
+        }
     })
 }
-// $(document).on('keypress',function(e) {
-//     if(e.which == 13) {
-//         alert('You pressed enter!');
-//     }
-// });
-=======
+
+
 $(function() {
 
     var cardName;
@@ -108,14 +114,6 @@ $(function() {
                 //     <td>Card Name Here</td>
                 //     <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
                 // </tr>
-
-
-
-
-            // var cardDiv = $("<div>");
-            // cardImage.attr("src", response.image_uris.large);
-            // cardDiv.append(cardImage);
-            //console.log(response.prices.usd) dot notation for price
             currencyConvert();
             }).catch(function(error){
             console.log('error:', error)
@@ -141,15 +139,6 @@ $(function() {
 
             });
 
-    }
-    // $(document).on('keypress',function(e) {
-    //     if(e.which == 13) {
-    //         alert('You pressed enter!');
-    //     }
-    // });
-
-
-
-
+        }
 });
-}
+});

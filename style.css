@@ -1,6 +1,18 @@
-body{
-    background-color: black;
-}
-h1{
-    color: red;
-}
+
+.grad {
+    background-image: linear-gradient(to bottom right, red, yellow);
+  }
+
+  .is-info {
+      margin-top: 20px;
+  }
+
+  .name {
+      font-weight: bold;
+      font-family: fantasy;
+  }
+
+  .cost {
+      font-weight: bold;
+  }
+
