@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <!-- Bulma Version 0.9.0-->
-    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/cyborg/bulmaswatch.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/bulmaswatch/cyborg/bulmaswatch.min.css">
     <link rel="stylesheet" type="text/css" href="assets/style.css">
 </head>
 
@@ -20,12 +20,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="navbar-brand">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Magicthegathering-logo.svg/1280px-Magicthegathering-logo.svg.png" width="200px"><h1 class="navbar-item brand-text">Card Pricing Database</h1>
-                <div class="navbar-burger burger" data-target="navMenu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+                <img src="assets/logo.png" width="200px"><h1 class="navbar-item brand-text">Card Pricing Database</h1>
             </div>
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-start">
@@ -38,39 +33,42 @@
     <div class="container">
         <div class="columns">
             <div class="column is-3 ">
-                <aside class="menu is-hidden-mobile">
+                <!-- <aside class="menu is-hidden-mobile"> -->
                     <p class="menu-label">
               
                     </p>
                     <div class="field">
                       <label class="label">Card Search</label>
                       <div class="control">
-                        <input class="input" type="text" placeholder="Card Name" id="addCard"> 
+
+
+                        <input class="cardSearch input" type="text" placeholder="Card Name" id="addCard">
+                        
                       </div>
                     </div>
-                    <p class="menu-label">
+                    <p class="menu-label is-hidden-mobile">
                        Current Sets
                     </p>
-                    <ul class="menu-list">
-                        <li><a>Core 2021</a></li>
+                    <ul class="menu-list is-hidden-mobile">
+                        <li><a>Zendikar Rising</a></li>
                         <li>
-                            <a>Other Current Sets</a>
                             <ul>
-                                <li><a>Zendikar Rising</a></li>
-                                <li><a>Ikoria</a></li>
+                                <li><a>Core Set 2021</a></li>
+                                <li><a>Ikoria: Lair of the Behemoths</a></li>
                                 <li><a>Theros Beyond Death</a></li>
                             </ul>
                        
                     </ul>
-                    <p class="menu-label">
-                        Previous Sets 
+
+                   
+   
+
+                    <p class="menu-label is-hidden-mobile">
+
                     </p>
                 </aside>
             </div>
             <div class="column is-9">
-                <nav class="breadcrumb" aria-label="breadcrumbs">
-              
-                </nav>
                 <section class="hero is-info welcome is-small grad">
                     <div class="hero-body">
                         <div class="container">
@@ -86,43 +84,17 @@
                 <section class="info-tiles">
                     <div class="tile is-ancestor has-text-centered">
                         <div class="tile is-parent">
-                            <!-- <article class="tile is-child box">
-                                <p class="title">439k</p>
-                                <p class="subtitle">Users</p>
-                            </article>
-                        </div>
-                        <div class="tile is-parent">
-                            <article class="tile is-child box">
-                                <p class="title">59k</p>
-                                <p class="subtitle">Products</p>
-                            </article>
-                        </div>
-                        <div class="tile is-parent">
-                            <article class="tile is-child box">
-                                <p class="title">3.4k</p>
-                                <p class="subtitle">Open Orders</p>
-                            </article>
-                        </div>
-                        <div class="tile is-parent">
-                            <article class="tile is-child box">
-                                <p class="title">19</p>
-                                <p class="subtitle">Exceptions</p>
-                            </article> -->
+                      
                         </div>
                     </div>
                 </section>
                 <div class="columns">
-                    <div class="column is-6">
+                    <div class="column is-5">
                         <div class="card events-card">
                             <header class="card-header">
                                 <p class="card-header-title">
                                     Cards
                                 </p>
-                                <a href="#" class="card-header-icon" aria-label="more options">
-                  <span class="icon">
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                </a>
                             </header>
                             <div class="card-table">
                                 <div class="content">
@@ -131,47 +103,47 @@
                                             <tr>
                                               <td width="10%"><i class="fab fa-wizards-of-the-coast"></i></td>
                                                 <td>Card Name Here</td>
-                                                <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                                                <td><a class="button is-small is-pulled-right is-primary grad" href="#">Select</a></td>
                                             </tr>
                                             <tr>
                                               <td width="5%"><i class="fab fa-wizards-of-the-coast"></i></td>
                                                 <td>Card Name Here</td>
-                                                <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                                                <td><a class="button is-small is-pulled-right is-primary grad" href="#">Select</a></td>
                                             </tr>
                                             <tr>
                                               <td width="5%"><i class="fab fa-wizards-of-the-coast"></i></td>
                                                 <td>Card Name Here</td>
-                                                <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                                                <td><a class="button is-small is-pulled-right is-primary grad" href="#">Select</a></td>
                                             </tr>
                                             <tr>
                                               <td width="5%"><i class="fab fa-wizards-of-the-coast"></i></td>
                                                 <td>Card Name Here</td>
-                                                <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                                                <td><a class="button is-small is-pulled-right is-primary grad" href="#">Select</a></td>
                                             </tr>
                                             <tr>
                                               <td width="5%"><i class="fab fa-wizards-of-the-coast"></i></td>
                                                 <td>Card Name Here</td>
-                                                <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                                                <td><a class="button is-small is-pulled-right is-primary grad" href="#">Select</a></td>
                                             </tr>
                                             <tr>
                                               <td width="5%"><i class="fab fa-wizards-of-the-coast"></i></td>
                                                 <td>Card Name Here</td>
-                                                <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                                                <td><a class="button is-small is-pulled-right is-primary grad" href="#">Select</a></td>
                                             </tr>
                                             <tr>
                                               <td width="5%"><i class="fab fa-wizards-of-the-coast"></i></td>
                                                 <td>Card Name Here</td>
-                                                <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                                                <td><a class="button is-small is-pulled-right is-primary grad" href="#">Select</a></td>
                                             </tr>
                                             <tr>
                                               <td width="5%"><i class="fab fa-wizards-of-the-coast"></i></td>
                                                 <td>Card Name Here</td>
-                                                <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                                                <td><a class="button is-small is-pulled-right is-primary grad" href="#">Select</a></td>
                                             </tr>
                                             <tr>
                                               <td width="5%"><i class="fab fa-wizards-of-the-coast"></i></td>
                                                 <td>Card Name Here</td>
-                                                <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                                                <td><a class="button is-small is-pulled-right is-primary grad" href="#">Select</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -181,58 +153,22 @@
                             </footer>
                         </div>
                     </div>
-                    <div class="column is-6">
+                    <div class="column is-4">
                       <div class="image">
-                        <img src="https://images-na.ssl-images-amazon.com/images/I/510j5z9%2BxuL._AC_.jpg">
+                        <img class='cardFace' src="assets/placeholder.png">
                       </div>
-                        <!-- <div class="card">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    Inventory Search
-                                </p>
-                                <a href="#" class="card-header-icon" aria-label="more options">
-                  <span class="icon">
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                </a>
-                            </header>
-                            <div class="card-content">
-                                <div class="content">
-                                    <div class="control has-icons-left has-icons-right">
-                                        <input class="input is-large" type="text" placeholder="">
-                                        <span class="icon is-medium is-left">
-                      <i class="fa fa-search"></i>
-                    </span>
-                                        <span class="icon is-medium is-right">
-                      <i class="fa fa-check"></i>
-                    </span>
-                                    </div>
+                  
                                 </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    User Search
-                                </p>
-                                <a href="#" class="card-header-icon" aria-label="more options">
-                  <span class="icon">
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                </a>
-                            </header>
-                            <div class="card-content">
-                                <div class="content">
-                                    <div class="control has-icons-left has-icons-right">
-                                        <input class="input is-large" type="text" placeholder="">
-                                        <span class="icon is-medium is-left">
-                      <i class="fa fa-search"></i>
-                    </span>
-                                        <span class="icon is-medium is-right">
-                      <i class="fa fa-check"></i>
-                    </span>
-                                    </div> -->
-                                </div>
+                                <div class="column is-3">
+                                  <div class ="card-info">
+                                    <h2 class='name'></h2>
+                                    <p class='cost'></p>
+                                    <p class='cardType'></p>
+                                    <p class='oracleText'></p>
+                                    <p class=powerToughness></p>
+                                    <p class='price'></p>
+                                    
+                                  </div>
                             </div>
                         </div>
                     </div>
@@ -241,12 +177,13 @@
         </div>
     </div>
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
     <script src="script.js"></script>
    <!-- // removed line as it is not being used <script async type="text/javascript" src="../js/bulma.js"></script> -->
 
-</body>
 
+</body>
 </html>
