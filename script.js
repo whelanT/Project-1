@@ -1,4 +1,51 @@
-var cardImage = '';
+$(function() {
+
+//add card to the search field, 
+$('#addCard').on('keypress', function(event){
+    if(event.which == 13){
+          var cardName = document.querySelector('#addCard').value;
+        console.log(cardName)
+        displayCard();
+    }
+    
+});
+
+//gives the card object, will later add code to append to the appropriate place on the page
+function displayCard(){
+    var cardName = document.querySelector('#addCard').value;
+    $.ajax({
+        url: 'https://api.scryfall.com/cards/named?fuzzy=' + cardName,
+        method: "GET"
+    }).then(function(response){
+        console.log(response)
+        console.log('price in usd:',response.prices.usd)
+
+        var newImg = response.image_uris.large; 
+        console.log(newImg)
+        $('#img').attr('src', newImg);
+
+        $('.othr').remove();
+        $('.pthr').remove();
+        $('.name').replaceWith('<h2 class="name">' + response.name + '</h2>');
+        $('.cost').replaceWith('<p class="cost">' + response.mana_cost + '</p>');
+        $('.cardType').replaceWith('<p class="cardType">' + response.type_line + '</p>');
+        if (response.oracle_text != null) {
+        $('.oracleText').replaceWith('<hr class="rounded othr"><p class="oracleText">' + response.oracle_text + '</p>');
+        } else {
+            $('.oracleText').replaceWith('<p class="oracleText"></p>');
+        }
+        if (response.power != null) {
+            $('.powerToughness').replaceWith('<hr class="rounded pthr"><p class="powerToughness">' + response.power + '/' + response.toughness + '</p>');
+            } else {
+            $('.powerToughness').replaceWith('<p class="powerToughness"></p>');
+            }
+        if (response.prices.usd != null) {
+        $('.price').replaceWith('<p class="price">$' + response.prices.usd + '</p>');
+        } else {
+        $('.price').replaceWith('<p class="price"></p>');
+        }
+    })
+}
 
 
 $(function() {
@@ -7,6 +54,7 @@ $(function() {
     var cardValueUSD;
     var cardValueEUR;
     var currency1 = "USD";
+    var deckArray = [];
 
 
 
@@ -27,42 +75,50 @@ $(function() {
             }).then(function (response) {
             console.log("response ", response);
             console.log("response status", response.status);
-            console.log('price:', response.prices.usd);
-            console.log('img url', response.image_uris.large);
-            cardImage = response.image_uris.border_crop;
-            $('.cardFace').replaceWith('<img class="cardFace" src="' + cardImage + '">');
-            // <img class='cardFace' src="assets/placeholder.png">
-            console.log('image test 1', cardImage)
+            console.log(response.prices.usd);
+            console.log(response.image_uris.large);
             console.log("USD Price is ", response.prices);
-            $('.othr').remove();
-            $('.pthr').remove();
-            $('.name').replaceWith('<h2 class="name">' + response.name + '</h2>');
-            $('.cost').replaceWith('<p class="cost">' + response.mana_cost + '</p>');
-            $('.cardType').replaceWith('<p class="cardType">' + response.type_line + '</p>');
-            if (response.oracle_text != null) {
-            $('.oracleText').replaceWith('<hr class="rounded othr"><p class="oracleText">' + response.oracle_text + '</p>');
-            } else {
-                $('.oracleText').replaceWith('<p class="oracleText"></p>');
-            }
-            if (response.power != null) {
-                $('.powerToughness').replaceWith('<hr class="rounded pthr"><p class="powerToughness">' + response.power + '/' + response.toughness + '</p>');
-                } else {
-                $('.powerToughness').replaceWith('<p class="powerToughness"></p>');
-                }
-            if (response.prices.usd != null) {
-            $('.price').replaceWith('<p class="price">$' + response.prices.usd + '</p>');
-            } else {
-            $('.price').replaceWith('<p class="price"></p>');
-            }
             cardValueUSD = response.prices.usd;
-            $('#addCard').val('');
-            // var cardDiv = $("<div>");
-            // cardImage.attr("src", response.image_uris.large);
-            // cardDiv.append(cardImage);
-            //console.log(response.prices.usd) dot notation for price
+            
+            // user input to array then array to string then to local storage
+            deckArray.push(response.name); 
+            console.log('response.name:', response.name);
+            localStorage.setItem("deckArray", JSON.stringify(deckArray));
+            console.log('deckArray as a string:', deckArray);
+
+            
+            // creating varibales for the info to be shown on the HTML 
+            //indented items show they are affecting the variable above
+            var tableRow = $("<tr>");
+            var tableDataIcon = $('<td width="10 %">');
+                var iTag = $("<i>");
+                iTag.addClass("fab fa-wizards-of-the-coast")
+                tableDataIcon.append(iTag)
+            var tableDataName = $("<td>");
+            var tableDataButton = $("<td>");
+                var aTag = $("<a>");
+                aTag.addClass("button is-small is-primary grad");
+                aTag.text("Select");
+                //did not add href to the button - would not know where to point it
+            tableDataButton.addClass("level-right");
+            tableDataButton.append(aTag);
+            // Moving items from the local storage to the html 
+            tableDataName.text(response.name);
+            tableRow.append(tableDataIcon,tableDataName,tableDataButton);
+            $('#tableBody').prepend(tableRow);
+
+
+            // HTML code for reference 
+                // <tr>
+                //     <td width="10%"><i class="fab fa-wizards-of-the-coast"></i></td>
+                //     <td>Card Name Here</td>
+                //     <td class="level-right"><a class="button is-small is-primary grad" href="#">Select</a></td>
+                // </tr>
             currencyConvert();
-            })
-            console.log('image test 2', cardImage)
+            }).catch(function(error){
+            console.log('error:', error)
+            console.log('error details:', error.responseJSON.details)
+            });
     }
 
 // https://api.exchangeratesapi.io/latest?base=USD
@@ -83,14 +139,6 @@ $(function() {
 
             });
 
-    }
-    // $(document).on('keypress',function(e) {
-    //     if(e.which == 13) {
-    //         alert('You pressed enter!');
-    //     }
-    // });
-
-
-
-
+        }
+});
 });
