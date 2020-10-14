@@ -16,3 +16,11 @@
       font-weight: bold;
   }
 
+  .price {
+     text-size-adjust: 8%;
+      margin-top: 5%;
+     
+  }
+  .converted {
+      margin-top: 5%;
+  }
