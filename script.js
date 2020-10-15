@@ -89,7 +89,9 @@ function createQuickCard() {
     var tableDataButton = $("<td>");
     var aTag = $("<a>");
     aTag.addClass("button is-small is-primary grad");
+    aTag.addClass("pleaseWork");
     aTag.text("Select");
+    aTag.attr('value', cardName);
 //did not add href to the button - would not know where to point it
     tableDataButton.addClass("level-right");
     tableDataButton.append(aTag);
@@ -117,4 +119,12 @@ $('#addCard').on('keypress', function (event) {
         cardName = document.querySelector('#addCard').value;
         displayCard();
     } 
+});
+
+$(document).on('click',".pleaseWork", function (e) {
+console.log("event", e.target);
+    cardName = $(this).attr("value");
+console.log ('it worked')
+displayCard()
+
 });
