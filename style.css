@@ -7,6 +7,15 @@
       margin-top: 20px;
   }
 
+  .name {
+      font-weight: bold;
+      font-family: fantasy;
+  }
+
+  .cost {
+      font-weight: bold;
+  }
+
   .price {
       margin-top: 5%;
       font-size: 36px;
