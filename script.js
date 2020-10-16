@@ -9,6 +9,7 @@ var currencyCatch;
 var cardValueVar;
 var cardValueVarRound;
 var currencySymbol;
+var counter = 0
 
 
 //This is the primary function that will call the card and dispaly it on the DOM
@@ -27,6 +28,8 @@ function displayCard() {
         $('.cardType').replaceWith('<p class="cardType">' + response.type_line + '</p>');
         if (response.oracle_text != null) {
             $('.oracleText').replaceWith('<hr class="rounded othr"><p class="oracleText">' + response.oracle_text + '</p>');
+        } else if (response.card_faces[0].oracle_text != null) {
+            $('.oracleText').replaceWith('<hr class="rounded othr"><p class="oracleText">' + response.card_faces[0].oracle_text + '<br>' + response.card_faces[1].oracle_text + '</p>');   
         } else {
             $('.oracleText').replaceWith('<p class="oracleText"></p>');
         }
@@ -41,6 +44,7 @@ function displayCard() {
             $('.price').replaceWith('<p class="price"></p>');
         }
         $('#addCard').val('');
+        jQuery('.card-info').addClass('infoblockstyle')
         cardValueUSD = response.prices.usd;
         currencyConvert();
         createDeckArray();
@@ -90,6 +94,7 @@ function createDeckArray() {
 // creating varibales for the info to be shown on the HTML 
 //indented items show they are affecting the variable above
 function createQuickCard() {
+    
     var tableRow = $("<tr>");
     var tableDataIcon = $('<td width="10 %">');
     var iTag = $("<i>");
@@ -102,13 +107,21 @@ function createQuickCard() {
     aTag.addClass("pleaseWork");
     aTag.text("Select");
     aTag.attr('value', cardName);
-//did not add href to the button - would not know where to point it
+    //did not add href to the button - would not know where to point it
     tableDataButton.addClass("level-right");
     tableDataButton.append(aTag);
-// Moving items from the local storage to the html 
+    // Moving items from the local storage to the html 
     tableDataName.text(cardName);
     tableRow.append(tableDataIcon,tableDataName,tableDataButton);
     $('#savedCards').prepend(tableRow);
+    counter++;
+    if (counter > 8){
+        counter--;
+        $('#savedCards').find("tr:last-child").remove()
+        console.log("tableRow")
+    
+
+    }
 };
 
 // These are all the trigger events for clicks and keypresses
