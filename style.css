@@ -43,3 +43,8 @@
 .powerToughness {
   text-align: right;
 } 
+
+.pull-down {
+
+  border-radius: 25%;
+}
