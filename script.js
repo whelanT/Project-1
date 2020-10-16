@@ -2,10 +2,15 @@
 var cardImage;
 var cardName;
 var cardValueUSD;
-var cardValueEUR;
 var currency1 = "USD";
 var deckArray = [];
+var currencyCode = document.querySelector('.currencySelect').value;
+var currencyCatch;
+var cardValueVar;
+var cardValueVarRound;
+var currencySymbol;
 var counter = 0
+
 
 //This is the primary function that will call the card and dispaly it on the DOM
 function displayCard() {
@@ -61,13 +66,16 @@ function currencyConvert() {
         url: 'https://api.exchangeratesapi.io/latest?base=' + currency1,
         method: "GET"
     }).then(function (response) {
-        console.log("response2 ", response);
-        console.log("responseEUR ", response.rates.EUR);
-        cardValueEUR = cardValueUSD * response.rates.EUR;
-        console.log('cardValueEUR:', cardValueEUR);
-        cardValueEuroRound = cardValueEUR.toFixed(2);
-        console.log('cardValueEuroRound:', cardValueEuroRound);
-        $('.converted').replaceWith('<p class="converted">€' + cardValueEuroRound + '</p>');
+        // console.log("response2 ", response);
+        // console.log("responsecurrencyCode ", response.rates.currencyCode);
+        currencyCatch = eval('response.rates.' + currencyCode);
+        console.log('currencyCatch:', currencyCatch)
+        cardValueVar = cardValueUSD * currencyCatch;
+        cardValueVarRound = cardValueVar.toFixed(2);
+        console.log('cardValueVarRound:', cardValueVarRound);
+        currencySymbol = document.getElementById(currencyCode).getAttribute("data-CurrencySymbol");
+        console.log('currencySymbol:', currencySymbol);
+        $('.converted').replaceWith('<p class="converted">' + currencySymbol  + cardValueVarRound + '</p>');
     });
 };
 
@@ -117,6 +125,7 @@ function createQuickCard() {
 };
 
 // These are all the trigger events for clicks and keypresses
+// change to point to list and point to innerHTML or innerText   <-----------------LOOK HERE FOR SELECTING THE DROPDOWN
 $(".modal-close").click(function() {
     $(".modal").removeClass("is-active");
 });
@@ -136,10 +145,17 @@ $('#addCard').on('keypress', function (event) {
     } 
 });
 
+$(".currencySelect").click(function () {
+    currencyCode = document.querySelector('.currencySelect').value;
+    currencyConvert();
+});
+
+
+// change to point to list and point to innerHTML or innerText 
 $(document).on('click',".pleaseWork", function (e) {
 console.log("event", e.target);
     cardName = $(this).attr("value");
-console.log ('it worked')
-displayCard()
+console.log ('it worked');
+displayCard();
 
 });
