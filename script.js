@@ -62,6 +62,9 @@ function currencyConvert() {
         console.log("responseEUR ", response.rates.EUR);
         cardValueEUR = cardValueUSD * response.rates.EUR;
         console.log('cardValueEUR:', cardValueEUR);
+        cardValueEuroRound = cardValueEUR.toFixed(2);
+        console.log('cardValueEuroRound:', cardValueEuroRound);
+        $('.converted').replaceWith('<p class="converted">€' + cardValueEuroRound + '</p>');
     });
 };
 
