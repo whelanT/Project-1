@@ -69,12 +69,12 @@ function currencyConvert() {
         // console.log("response2 ", response);
         // console.log("responsecurrencyCode ", response.rates.currencyCode);
         currencyCatch = eval('response.rates.' + currencyCode);
-        console.log('currencyCatch:', currencyCatch)
+        // console.log('currencyCatch:', currencyCatch)
         cardValueVar = cardValueUSD * currencyCatch;
         cardValueVarRound = cardValueVar.toFixed(2);
-        console.log('cardValueVarRound:', cardValueVarRound);
+        // console.log('cardValueVarRound:', cardValueVarRound);
         currencySymbol = document.getElementById(currencyCode).getAttribute("data-CurrencySymbol");
-        console.log('currencySymbol:', currencySymbol);
+        // console.log('currencySymbol:', currencySymbol);
         $('.converted').replaceWith('<p class="converted">' + currencySymbol  + cardValueVarRound + '</p>');
     });
 };
@@ -153,9 +153,9 @@ $(".currencySelect").click(function () {
 
 // change to point to list and point to innerHTML or innerText 
 $(document).on('click',".pleaseWork", function (e) {
-console.log("event", e.target);
+// console.log("event", e.target);
     cardName = $(this).attr("value");
-console.log ('it worked');
+// console.log ('it worked');
 displayCard();
 
 });
