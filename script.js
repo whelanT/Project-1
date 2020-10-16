@@ -23,6 +23,8 @@ function displayCard() {
         $('.cardType').replaceWith('<p class="cardType">' + response.type_line + '</p>');
         if (response.oracle_text != null) {
             $('.oracleText').replaceWith('<hr class="rounded othr"><p class="oracleText">' + response.oracle_text + '</p>');
+        } else if (response.card_faces[0].oracle_text != null) {
+            $('.oracleText').replaceWith('<hr class="rounded othr"><p class="oracleText">' + response.card_faces[0].oracle_text + '<br>' + response.card_faces[1].oracle_text + '</p>');   
         } else {
             $('.oracleText').replaceWith('<p class="oracleText"></p>');
         }
@@ -37,6 +39,7 @@ function displayCard() {
             $('.price').replaceWith('<p class="price"></p>');
         }
         $('#addCard').val('');
+        jQuery('.card-info').addClass('infoblockstyle')
         cardValueUSD = response.prices.usd;
         currencyConvert();
         createDeckArray();
