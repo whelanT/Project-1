@@ -153,6 +153,23 @@ $('#addCard').on('keypress', function (event) {
     } 
 });
 
+$("#clearBtn").click(function () {
+    favArray = [];
+    localStorage.clear();
+    console.log('favArray:', favArray)
+    $('.cardFace').replaceWith('');
+    $('.othr').remove();
+    $('.pthr').remove();
+    $('.name').replaceWith('');
+    $('.cost').replaceWith('');
+    $('.cardType').replaceWith('');
+    $('.oracleText').replaceWith('');
+    $('.powerToughness').replaceWith('');
+    $('.price').replaceWith('');
+    $('.converted').replaceWith('');
+    $('td').replaceWith('');
+});
+
 
 $(".currencySelect").change(function () {
     currencyCode = $(".currencySelect option:selected").attr("id");
