@@ -4,7 +4,7 @@ var cardName;
 var cardValueUSD;
 var currency1 = "USD";
 var deckArray = [];
-var currencyCode = document.querySelector('.currencySelect').value;
+var currencyCode;
 var currencyCatch;
 var cardValueVar;
 var cardValueVarRound;
@@ -39,7 +39,7 @@ function displayCard() {
             $('.powerToughness').replaceWith('<p class="powerToughness"></p>');
         }
         if (response.prices.usd != null) {
-            $('.price').replaceWith('<p class="price">$' + response.prices.usd + '</p>');
+            $('.price').replaceWith('<p class="price">US$' + response.prices.usd + '</p>');
         } else {
             $('.price').replaceWith('<p class="price">$0.00</p>');
         }
@@ -146,19 +146,23 @@ $('#addCard').on('keypress', function (event) {
     } 
 });
 
+
 $(".currencySelect").change(function () {
-    currencyCode = document.querySelector('.currencySelect').value;
+    currencyCode = $(".currencySelect option:selected").attr("id");
     if ($('.converted').hasClass('convertpricestyle')) {
         currencyConvert()
     } else {
 
     }
+
 });
 
 
 // change to point to list and point to innerHTML or innerText 
 $(document).on('click',".pleaseWork", function (e) {
     cardName = $(this).attr("value");
+    console.log('cardName:', cardName)
+
 displayCard();
 
 });
