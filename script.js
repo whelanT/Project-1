@@ -4,7 +4,7 @@ var cardName;
 var cardValueUSD;
 var currency1 = "USD";
 var deckArray = [];
-var currencyCode;
+var currencyCode = "EUR";
 var currencyCatch;
 var cardValueVar;
 var cardValueVarRound;
@@ -39,7 +39,7 @@ function displayCard() {
             $('.powerToughness').replaceWith('<p class="powerToughness"></p>');
         }
         if (response.prices.usd != null) {
-            $('.price').replaceWith('<p class="price">US$' + response.prices.usd + '</p>');
+            $('.price').replaceWith('<p class="price">US$ ' + response.prices.usd + '</p>');
         } else {
             $('.price').replaceWith('<p class="price">$0.00</p>');
         }
