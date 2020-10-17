@@ -169,7 +169,7 @@ $(".currencySelect").change(function () {
 function showFavorites(){
     var myFavs = JSON.parse(localStorage.getItem('favArray'));
     if(myFavs !== null){
-        favArray = myFavs;
+        favArray = jQuery.uniqueSort(myFavs);
         for (i = 0; i < myFavs.length; i++) {
         cardName = myFavs[i];
         createQuickCard(myFavs[i]);
