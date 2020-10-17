@@ -5,11 +5,9 @@
 
 .welcome {
   border-radius: 0px 0px 5px 0px;
-}
-
-
-.is-info {
-margin-top: 20px;
+  background-image: url('assets/backdrops/all.png');
+  background-size: auto;
+  margin-top: 20px;
 }
 
 .name {
@@ -63,12 +61,6 @@ border-radius: 5px;
 font-family: Arial, Helvetica, sans-serif;
 color: black;
 font-size: medium;
-}
-
-
-.welcome {
-  background-image: url('assets/backdrops/all.png');
-  background-size: auto;
 }
 
 .footer {
