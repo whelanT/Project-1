@@ -41,7 +41,7 @@ function displayCard() {
         if (response.prices.usd != null) {
             $('.price').replaceWith('<p class="price">$' + response.prices.usd + '</p>');
         } else {
-            $('.price').replaceWith('<p class="price"></p>');
+            $('.price').replaceWith('<p class="price">$0.00</p>');
         }
         $('#addCard').val('');
         jQuery('.card-info').addClass('infoblockstyle');
@@ -146,8 +146,13 @@ $('#addCard').on('keypress', function (event) {
     } 
 });
 
-$(".currencySelect").click(function () {
+$(".currencySelect").change(function () {
     currencyCode = document.querySelector('.currencySelect').value;
+    if ($('.converted').hasClass('convertpricestyle')) {
+        currencyConvert()
+    } else {
+
+    }
 });
 
 
