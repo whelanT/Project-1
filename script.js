@@ -190,6 +190,6 @@ $(document).on('click',".pleaseWork", function (e) {
    localStorage.setItem('favArray', JSON.stringify(favArray))
      
 console.log (cardName);
-// displayCard();
+displayCard();
 
 });
