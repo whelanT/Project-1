@@ -1,12 +1,21 @@
 $(function() {
+    var cardName = document.querySelector('#addCard').value
 
 //add card to the search field, 
 $('#addCard').on('keypress', function(event){
+var cardName = document.querySelector('#addCard').value;
+
+    if(cardName === ""){
+        return;
+    }
+
     if(event.which == 13){
-          var cardName = document.querySelector('#addCard').value;
+          
         console.log(cardName)
         displayCard();
+        
     }
+
     
 });
 
@@ -46,24 +55,45 @@ function displayCard(){
         } else {
         $('.price').replaceWith('<p class="price"></p>');
         }
-        var tableRow = $("<tr>");
-        var tableDataIcon = $('<td width="10 %">');
-            var iTag = $("<i>");
-            iTag.addClass("fab fa-wizards-of-the-coast")
-            tableDataIcon.append(iTag)
-        var tableDataName = $("<td>");
-        var tableDataButton = $("<td>");
-            var aTag = $("<a>");
-            aTag.addClass("button is-small is-primary grad");
-            aTag.text("Select");
-            //did not add href to the button - would not know where to point it
-        tableDataButton.addClass("level-right");
-        tableDataButton.append(aTag);
-        // Moving items from the local storage to the html 
-        tableDataName.text(response.name);
-        tableRow.append(tableDataIcon,tableDataName,tableDataButton);
-        $('#tableBody').prepend(tableRow);
+        
+        buildTable(response);
+        // var tableRow = $("<tr>");
+        // var tableDataIcon = $('<td width="10 %">');
+        //     var iTag = $("<i>");
+        //     iTag.addClass("fab fa-wizards-of-the-coast")
+        //     tableDataIcon.append(iTag)
+        // var tableDataName = $("<td>");
+        // var tableDataButton = $("<td>");
+        //     var aTag = $("<a>");
+        //     aTag.addClass("button is-small is-primary grad");
+        //     aTag.text("Favorite");
+        // tableDataButton.addClass("level-right");
+        // tableDataButton.append(aTag);
+        // // Moving items from the local storage to the html 
+        // tableDataName.text(response.name);
+        // tableRow.append(tableDataIcon,tableDataName,tableDataButton);
+        // $('#tableBody').prepend(tableRow);
+        // tableDataButton.addeventlistener('click', console.log('clicked'))
     })
+}
+
+function buildTable(){
+    var tableRow = $("<tr>");
+    var tableDataIcon = $('<td width="10 %">');
+        var iTag = $("<i>");
+        iTag.addClass("fab fa-wizards-of-the-coast")
+        tableDataIcon.append(iTag)
+    var tableDataName = $("<td>");
+    var tableDataButton = $("<td>");
+        var aTag = $("<a>");
+        aTag.addClass("button is-small is-primary grad");
+        aTag.text("Favorite");
+    tableDataButton.addClass("level-right");
+    tableDataButton.append(aTag);
+    // Moving items from the local storage to the html 
+    tableDataName.text(cardName.value);
+    tableRow.append(tableDataIcon,tableDataName,tableDataButton);
+    $('#tableBody').prepend(tableRow);
 }
 });
 
