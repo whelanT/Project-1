@@ -4,12 +4,6 @@ Project 1, due October 20th
 
 To-Do-List
 
-Currency Converter Implemented - Tom
-
-Currency Dropdown - Tom
-
-Limit Number of Cards Displayed in Array - Adam
-
 Advanced Search Paramaters - Robert
 
 Functionality of Select Button
@@ -25,3 +19,5 @@ add link to mtg website - Adam
 line breaks (or hyphen) in oracle text - Robert
 
 make if/then statement for enter key when modal is open -
+
+https://whelant.github.io/Project-1/

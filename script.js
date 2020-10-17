@@ -5,7 +5,7 @@ var cardValueUSD;
 var currency1 = "USD";
 var deckArray = [];
 var favArray = [];
-var currencyCode = document.querySelector('.currencySelect').value;
+var currencyCode = "EUR";
 var currencyCatch;
 var cardValueVar;
 var cardValueVarRound;
@@ -41,12 +41,14 @@ function displayCard() {
             $('.powerToughness').replaceWith('<p class="powerToughness"></p>');
         }
         if (response.prices.usd != null) {
-            $('.price').replaceWith('<p class="price">$' + response.prices.usd + '</p>');
+            $('.price').replaceWith('<p class="price">US$ ' + response.prices.usd + '</p>');
         } else {
-            $('.price').replaceWith('<p class="price"></p>');
+            $('.price').replaceWith('<p class="price">$0.00</p>');
         }
         $('#addCard').val('');
-        jQuery('.card-info').addClass('infoblockstyle')
+        jQuery('.card-info').addClass('infoblockstyle');
+        jQuery('.price').addClass('pricestyle');
+        jQuery('.converted').addClass('convertpricestyle');
         cardValueUSD = response.prices.usd;
         currencyConvert();
         createDeckArray();
@@ -68,16 +70,11 @@ function currencyConvert() {
         url: 'https://api.exchangeratesapi.io/latest?base=' + currency1,
         method: "GET"
     }).then(function (response) {
-        // console.log("response2 ", response);
-        // console.log("responsecurrencyCode ", response.rates.currencyCode);
         currencyCatch = eval('response.rates.' + currencyCode);
-        // console.log('currencyCatch:', currencyCatch)
         cardValueVar = cardValueUSD * currencyCatch;
         cardValueVarRound = cardValueVar.toFixed(2);
-        // console.log('cardValueVarRound:', cardValueVarRound);
         currencySymbol = document.getElementById(currencyCode).getAttribute("data-CurrencySymbol");
-        // console.log('currencySymbol:', currencySymbol);
-        $('.converted').replaceWith('<p class="converted">' + currencySymbol  + cardValueVarRound + '</p>');
+        $('.converted').replaceWith('<p class="converted convertpricestyle">' + currencySymbol  + cardValueVarRound + '</p>');
     });
 };
 
@@ -147,14 +144,24 @@ $('#addCard').on('keypress', function (event) {
         return;
     }
     if (event.which == 13) {
+        if ($('.modal').hasClass('is-active')) {
+            $(".modal").removeClass("is-active");
+        } else {
         cardName = document.querySelector('#addCard').value;
         displayCard();
+        }
     } 
 });
 
-$(".currencySelect").click(function () {
-    currencyCode = document.querySelector('.currencySelect').value;
-    currencyConvert();
+
+$(".currencySelect").change(function () {
+    currencyCode = $(".currencySelect option:selected").attr("id");
+    if ($('.converted').hasClass('convertpricestyle')) {
+        currencyConvert()
+    } else {
+
+    }
+
 });
 
 
