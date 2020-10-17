@@ -24,6 +24,8 @@ margin-top: 2px;
 background-color: #4a4a4a;
 border-radius: 0px 0px 5px 0px;
 padding: 10px;
+font-size: large;
+font-weight: bold;
 }
 
 .convertpricestyle {
@@ -32,6 +34,8 @@ width: 99%;
 background-color: #4a4a4a;
 border-radius: 0px 5px 5px 5px;
 padding: 10px;
+font-size: large;
+font-weight: bold;
 }
 
 .infoblockstyle {
@@ -57,4 +61,13 @@ border-radius: 5px;
 font-family: Arial, Helvetica, sans-serif;
 color: black;
 font-size: medium;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1%;
 }
