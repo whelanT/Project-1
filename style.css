@@ -21,17 +21,19 @@
   font-weight: bold;
 }
 
-.price {
-  margin-top: 5%;
-  font-size: 36px;
+.pricestyle {
+  margin-top: 2px;
   background-color: #4a4a4a;
-  text-align: left;
+  border-radius: 0px 0px 5px 0px;
+  padding: 10px;
 }
-.converted {
-  margin-top: 5%;
-  font-size: 36px;
+
+.convertpricestyle {
+  margin-top: 2px;
+  width: 99%;
   background-color: #4a4a4a;
-  text-align: left;
+  border-radius: 0px 5px 5px 5px;
+  padding: 10px;
 }
 
 .infoblockstyle {

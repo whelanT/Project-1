@@ -4,12 +4,6 @@ Project 1, due October 20th
 
 To-Do-List
 
-Currency Converter Implemented - Tom
-
-Currency Dropdown - Tom
-
-Limit Number of Cards Displayed in Array - Adam
-
 Advanced Search Paramaters - Robert
 
 Functionality of Select Button
