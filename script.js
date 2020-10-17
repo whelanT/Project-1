@@ -44,7 +44,9 @@ function displayCard() {
             $('.price').replaceWith('<p class="price"></p>');
         }
         $('#addCard').val('');
-        jQuery('.card-info').addClass('infoblockstyle')
+        jQuery('.card-info').addClass('infoblockstyle');
+        jQuery('.price').addClass('pricestyle');
+        jQuery('.converted').addClass('convertpricestyle');
         cardValueUSD = response.prices.usd;
         currencyConvert();
         createDeckArray();
@@ -66,16 +68,11 @@ function currencyConvert() {
         url: 'https://api.exchangeratesapi.io/latest?base=' + currency1,
         method: "GET"
     }).then(function (response) {
-        // console.log("response2 ", response);
-        // console.log("responsecurrencyCode ", response.rates.currencyCode);
         currencyCatch = eval('response.rates.' + currencyCode);
-        // console.log('currencyCatch:', currencyCatch)
         cardValueVar = cardValueUSD * currencyCatch;
         cardValueVarRound = cardValueVar.toFixed(2);
-        // console.log('cardValueVarRound:', cardValueVarRound);
         currencySymbol = document.getElementById(currencyCode).getAttribute("data-CurrencySymbol");
-        // console.log('currencySymbol:', currencySymbol);
-        $('.converted').replaceWith('<p class="converted">' + currencySymbol  + cardValueVarRound + '</p>');
+        $('.converted').replaceWith('<p class="converted convertpricestyle">' + currencySymbol  + cardValueVarRound + '</p>');
     });
 };
 
@@ -140,22 +137,23 @@ $(".modal-background").click(function() {
 
 $('#addCard').on('keypress', function (event) {
     if (event.which == 13) {
+        if ($('.modal').hasClass('is-active')) {
+            $(".modal").removeClass("is-active");
+        } else {
         cardName = document.querySelector('#addCard').value;
         displayCard();
+        }
     } 
 });
 
 $(".currencySelect").click(function () {
     currencyCode = document.querySelector('.currencySelect').value;
-    currencyConvert();
 });
 
 
 // change to point to list and point to innerHTML or innerText 
 $(document).on('click',".pleaseWork", function (e) {
-// console.log("event", e.target);
     cardName = $(this).attr("value");
-// console.log ('it worked');
 displayCard();
 
 });
