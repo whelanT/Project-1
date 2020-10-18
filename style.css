@@ -1,61 +1,73 @@
 
 .grad {
-    background-image: linear-gradient(to bottom right, red, yellow);
-  }
-
-  .welcome {
-    border-radius: 0px 0px 5px 0px;
+  background-image: linear-gradient(to bottom right, red, yellow);
 }
 
-
-.is-info {
+.welcome {
+  border-radius: 0px 0px 5px 0px;
+  background-image: url('assets/backdrops/all.png');
+  background-size: auto;
   margin-top: 20px;
 }
 
 .name {
-  font-weight: bold;
-  font-family: fantasy;
+font-weight: bold;
+font-family: fantasy;
 }
 
 .cost {
-  font-weight: bold;
+font-weight: bold;
 }
 
 .pricestyle {
-  margin-top: 2px;
-  background-color: #4a4a4a;
-  border-radius: 0px 0px 5px 0px;
-  padding: 10px;
+margin-top: 2px;
+background-color: #4a4a4a;
+border-radius: 0px 0px 5px 0px;
+padding: 10px;
+font-size: large;
+font-weight: bold;
 }
 
 .convertpricestyle {
-  margin-top: 2px;
-  width: 99%;
-  background-color: #4a4a4a;
-  border-radius: 0px 5px 5px 5px;
-  padding: 10px;
+margin-top: 2px;
+width: 99%;
+background-color: #4a4a4a;
+border-radius: 0px 5px 5px 5px;
+padding: 10px;
+font-size: large;
+font-weight: bold;
 }
 
 .infoblockstyle {
-  background-color: #4a4a4a;
-  border-radius: 0px 5px 5px 0px;
-  padding: 10px;
+background-color: #4a4a4a;
+border-radius: 0px 5px 5px 0px;
+padding: 10px;
 }
 
 .powerToughness {
-  text-align: right;
+text-align: right;
 } 
 
 .currencySelect {
-  width: 100%;
-  padding: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: medium;
-  color: lightgray;
-  border-radius: 5px;
+width: 100%;
+padding: 10px;
+font-family: Arial, Helvetica, sans-serif;
+font-size: medium;
+color: black;
+border-radius: 5px;
 }
 
 .cardSearch {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: medium;
+font-family: Arial, Helvetica, sans-serif;
+color: black;
+font-size: medium;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1%;
 }

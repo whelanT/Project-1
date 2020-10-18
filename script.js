@@ -4,13 +4,15 @@ var cardName;
 var cardValueUSD;
 var currency1 = "USD";
 var deckArray = [];
-var currencyCode;
+var favArray = [];
+var currencyCode = "EUR";
 var currencyCatch;
 var cardValueVar;
 var cardValueVarRound;
 var currencySymbol;
 var counter = 0
 
+showFavorites();
 
 //This is the primary function that will call the card and dispaly it on the DOM
 function displayCard() {
@@ -39,7 +41,7 @@ function displayCard() {
             $('.powerToughness').replaceWith('<p class="powerToughness"></p>');
         }
         if (response.prices.usd != null) {
-            $('.price').replaceWith('<p class="price">US$' + response.prices.usd + '</p>');
+            $('.price').replaceWith('<p class="price">US$ ' + response.prices.usd + '</p>');
         } else {
             $('.price').replaceWith('<p class="price">$0.00</p>');
         }
@@ -50,7 +52,7 @@ function displayCard() {
         cardValueUSD = response.prices.usd;
         currencyConvert();
         createDeckArray();
-        createQuickCard();
+        createQuickCard(response.name);
         }).catch(function (error) {
             $('.error').replaceWith('<p class="error">' + error.responseJSON.details + '</p>');
             $(".modal").addClass("is-active"); 
@@ -85,13 +87,14 @@ function createDeckArray() {
     console.log('deckArray as a string:', deckArray);
 };
 
-
-
 // This function adds the card to the list of cards on the DOM
 // creating varibales for the info to be shown on the HTML 
 //indented items show they are affecting the variable above
-function createQuickCard() {
-    
+//create cardnmae locale so we can clearly tell it's a local variable
+function createQuickCard(cardNameLocale) {
+    if (cardNameLocale === null){
+        return;
+    }
     var tableRow = $("<tr>");
     var tableDataIcon = $('<td width="10 %">');
     var iTag = $("<i>");
@@ -102,17 +105,17 @@ function createQuickCard() {
     var aTag = $("<a>");
     aTag.addClass("button is-small is-primary grad");
     aTag.addClass("pleaseWork");
-    aTag.text("Select");
-    aTag.attr('value', cardName);
+    aTag.text("favorite");
+    aTag.attr('value', cardNameLocale);
     //did not add href to the button - would not know where to point it
     tableDataButton.addClass("level-right");
     tableDataButton.append(aTag);
     // Moving items from the local storage to the html 
-    tableDataName.text(cardName);
+    tableDataName.text(cardNameLocale);
     tableRow.append(tableDataIcon,tableDataName,tableDataButton);
     $('#savedCards').prepend(tableRow);
     counter++;
-    if (counter > 8){
+    if (counter > 10){
         counter--;
         $('#savedCards').find("tr:last-child").remove()
         console.log("tableRow")
@@ -136,6 +139,10 @@ $(".modal-background").click(function() {
 });
 
 $('#addCard').on('keypress', function (event) {
+    cardName = document.querySelector('#addCard').value;
+    if(cardName === null){
+        return;
+    }
     if (event.which == 13) {
         if ($('.modal').hasClass('is-active')) {
             $(".modal").removeClass("is-active");
@@ -144,6 +151,23 @@ $('#addCard').on('keypress', function (event) {
         displayCard();
         }
     } 
+});
+
+$("#clearBtn").click(function () {
+    favArray = [];
+    localStorage.clear();
+    console.log('favArray:', favArray)
+    $('.cardFace').replaceWith('');
+    $('.othr').remove();
+    $('.pthr').remove();
+    $('.name').replaceWith('');
+    $('.cost').replaceWith('');
+    $('.cardType').replaceWith('');
+    $('.oracleText').replaceWith('');
+    $('.powerToughness').replaceWith('');
+    $('.price').replaceWith('');
+    $('.converted').replaceWith('');
+    $('td').replaceWith('');
 });
 
 
@@ -158,11 +182,31 @@ $(".currencySelect").change(function () {
 });
 
 
+// loads the favorites from the favarray onto the page
+function showFavorites(){
+    var myFavs = JSON.parse(localStorage.getItem('favArray'));
+    if(myFavs !== null){
+        favArray = jQuery.uniqueSort(myFavs);
+        for (i = 0; i < myFavs.length; i++) {
+        cardName = myFavs[i];
+        createQuickCard(myFavs[i]);
+        
+    }
+    }
+    
+}
+
+
+
 // change to point to list and point to innerHTML or innerText 
 $(document).on('click',".pleaseWork", function (e) {
+// console.log("event", e.target);
+    // localStorage.getItem('favArray');
     cardName = $(this).attr("value");
-    console.log('cardName:', cardName)
-
+     favArray.push(cardName);
+   localStorage.setItem('favArray', JSON.stringify(favArray))
+     
+console.log (cardName);
 displayCard();
 
 });
