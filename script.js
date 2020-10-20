@@ -51,20 +51,21 @@ function displayCard() {
         jQuery('.converted').addClass('convertpricestyle');
         cardValueUSD = response.prices.usd;
         currencyConvert();
-        createDeckArray();
-        createQuickCard(response.name);
+        if(jQuery.inArray(cardName, deckArray) == -1 || deckArray === null) {
+            createQuickCard(cardName);
+            createDeckArray();
+        }else{
+            return
+        }
+
         }).catch(function (error) {
             $('.error').replaceWith('<p class="error">' + error.responseJSON.details + '</p>');
             $(".modal").addClass("is-active"); 
             $('#addCard').val('');
         });
-    
 };
 
-// Thoughts would need to allow user to pick from a list the base currency and the desired currency (the gathering API has EUR and USD available where the currency api has more options), 
-// Side thought, might auto select between USD and EUR (go from USD to EUR if it is not available) and then let the user select the value from the drop down of allowed currencies from the xchange API - 
-
-// Functional notes for below: Need to set up variables to accept the user selection then combine user selection with the drill down for the code.  userWantsCur = drop down; userWantsCurrencyDrillDown = response.rates.userWantsCur; (need to make sure it comes out as an interger)
+// This is the function that controls the currency conversion process
 function currencyConvert() {
     $.ajax({
         url: 'https://api.exchangeratesapi.io/latest?base=' + currency1,
@@ -78,54 +79,64 @@ function currencyConvert() {
     });
 };
 
-// This function will update the array after the card is pulled
-// user input to array then array to string then to local storage
-function createDeckArray() {
-    deckArray.push(cardName); 
-    console.log('response.name:', cardName);
-    localStorage.setItem("deckArray", JSON.stringify(deckArray));
-    console.log('deckArray as a string:', deckArray);
-};
-
-// This function adds the card to the list of cards on the DOM
-// creating varibales for the info to be shown on the HTML 
-//indented items show they are affecting the variable above
-//create cardnmae locale so we can clearly tell it's a local variable
-function createQuickCard(cardNameLocale) {
-    if (cardNameLocale === null){
-        return;
-    }
-    var tableRow = $("<tr>");
-    var tableDataIcon = $('<td width="10 %">');
-    var iTag = $("<i>");
-    iTag.addClass("fab fa-wizards-of-the-coast")
-    tableDataIcon.append(iTag)
-    var tableDataName = $("<td>");
-    var tableDataButton = $("<td>");
-    var aTag = $("<a>");
-    aTag.addClass("button is-small is-primary grad");
-    aTag.addClass("pleaseWork");
-    aTag.text("favorite");
-    aTag.attr('value', cardNameLocale);
-    //did not add href to the button - would not know where to point it
-    tableDataButton.addClass("level-right");
-    tableDataButton.append(aTag);
-    // Moving items from the local storage to the html 
-    tableDataName.text(cardNameLocale);
-    tableRow.append(tableDataIcon,tableDataName,tableDataButton);
-    $('#savedCards').prepend(tableRow);
+// This function adds the card to the list of cards on the DOM and regulates the length of the list
+function createQuickCard() {
+    $('#savedCards').after(
+        '<tr><td width="10%"><i class="fab fa-wizards-of-the-coast"></td><td width="70%"><a class="cardRecall" value="'
+        + cardName + 
+        '">' 
+        + cardName + 
+        '</p></td><td width="20%"><a class="button is-small is-primary grad saveCardBtn" value="'
+        + cardName + 
+        '">Save Card</a></td></tr>');
     counter++;
     if (counter > 10){
         counter--;
         $('#savedCards').find("tr:last-child").remove()
-        console.log("tableRow")
-    
-
     }
 };
 
-// These are all the trigger events for clicks and keypresses
-// change to point to list and point to innerHTML or innerText   <-----------------LOOK HERE FOR SELECTING THE DROPDOWN
+// This function will update the array after the card is pulled
+function createDeckArray() {
+    deckArray.push(cardName); 
+    localStorage.setItem("deckArray", JSON.stringify(deckArray));
+};
+
+// loads the favorites from the favarray onto the page
+function showFavorites(){
+    var myFavs = JSON.parse(localStorage.getItem('favArray'));
+    if(myFavs !== null){
+        favArray = jQuery.uniqueSort(myFavs);
+        for (i = 0; i < myFavs.length; i++) {
+        cardName = myFavs[i];
+        createQuickCard(myFavs[i]); }
+    } 
+}
+
+//These are all the trigger events for the Card Array
+$("td").on("click", ".cardRecall", function() {
+    deckArray = favArray
+    cardName = $(this).attr("value");
+    displayCard(cardName)
+});
+
+$(document).on('click',".saveCardBtn", function (e) {
+    cardName = $(this).attr("value");
+    favArray.push(cardName);
+   localStorage.setItem('favArray', JSON.stringify(favArray))
+});
+
+//These are the trigger events related to currency conversion
+$(".currencySelect").change(function () {
+    currencyCode = $(".currencySelect option:selected").attr("id");
+    if ($('.converted').hasClass('convertpricestyle')) {
+        currencyConvert()
+    } else {
+        return
+    }
+});
+
+// These are all the trigger events for General Clicks & Keypresses
 $(".modal-close").click(function() {
     $(".modal").removeClass("is-active");
 });
@@ -138,6 +149,13 @@ $(".modal-background").click(function() {
     $(".modal").removeClass("is-active");
 });
 
+$("#clearBtn").click(function () {
+    favArray = [];
+    localStorage.clear();
+    $('td').replaceWith('');
+});
+
+// This is the main trigger event for the page
 $('#addCard').on('keypress', function (event) {
     cardName = document.querySelector('#addCard').value;
     if(cardName === null){
@@ -151,62 +169,4 @@ $('#addCard').on('keypress', function (event) {
         displayCard();
         }
     } 
-});
-
-$("#clearBtn").click(function () {
-    favArray = [];
-    localStorage.clear();
-    console.log('favArray:', favArray)
-    $('.cardFace').replaceWith('');
-    $('.othr').remove();
-    $('.pthr').remove();
-    $('.name').replaceWith('');
-    $('.cost').replaceWith('');
-    $('.cardType').replaceWith('');
-    $('.oracleText').replaceWith('');
-    $('.powerToughness').replaceWith('');
-    $('.price').replaceWith('');
-    $('.converted').replaceWith('');
-    $('td').replaceWith('');
-});
-
-
-$(".currencySelect").change(function () {
-    currencyCode = $(".currencySelect option:selected").attr("id");
-    if ($('.converted').hasClass('convertpricestyle')) {
-        currencyConvert()
-    } else {
-
-    }
-
-});
-
-
-// loads the favorites from the favarray onto the page
-function showFavorites(){
-    var myFavs = JSON.parse(localStorage.getItem('favArray'));
-    if(myFavs !== null){
-        favArray = jQuery.uniqueSort(myFavs);
-        for (i = 0; i < myFavs.length; i++) {
-        cardName = myFavs[i];
-        createQuickCard(myFavs[i]);
-        
-    }
-    }
-    
-}
-
-
-
-// change to point to list and point to innerHTML or innerText 
-$(document).on('click',".pleaseWork", function (e) {
-// console.log("event", e.target);
-    // localStorage.getItem('favArray');
-    cardName = $(this).attr("value");
-     favArray.push(cardName);
-   localStorage.setItem('favArray', JSON.stringify(favArray))
-     
-console.log (cardName);
-displayCard();
-
 });

@@ -1,4 +1,3 @@
-
 .grad {
   background-image: linear-gradient(to bottom right, red, yellow);
 }
@@ -14,6 +13,16 @@
 font-weight: bold;
 font-family: fantasy;
 }
+
+#clearBtn {
+  margin-top: 10px;
+  width: 100%;
+}
+
+a {
+   color: white; 
+   font-weight: bold;
+  }
 
 .cost {
 font-weight: bold;
