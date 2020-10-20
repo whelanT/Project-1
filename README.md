@@ -1,23 +1,9 @@
 # Project-1
 Project 1, due October 20th
 
+This page gives you the ability to search for information on Magic: the Gathering cards while simultaneously allowing you to dynamically check the price of those cards in a large variety of world currencies. 
+It utilizes the Skyfall and ExchangeRates APIs in order to gather a display this information. 
+The page also allows you to save cards you would like to return to later.
 
-To-Do-List
-
-Advanced Search Paramaters - Robert
-
-Functionality of Select Button
-
-Prevent Duplicate Entries on Card List
-
-Work on secondary banner/header - Robert
-
-deploy live version and add link to readme - Terran
-
-add link to mtg website - Adam
-
-line breaks (or hyphen) in oracle text - Robert
-
-make if/then statement for enter key when modal is open -
 
 https://whelant.github.io/Project-1/
