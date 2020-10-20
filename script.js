@@ -114,8 +114,7 @@ function showFavorites(){
 }
 
 //These are all the trigger events for the Card Array
-$("td").on("click", ".cardRecall", function() {
-    deckArray = favArray
+$(document).on("click", ".cardRecall", function() {
     cardName = $(this).attr("value");
     displayCard(cardName)
 });
@@ -132,7 +131,7 @@ $(".currencySelect").change(function () {
     if ($('.converted').hasClass('convertpricestyle')) {
         currencyConvert()
     } else {
-        return
+        return;
     }
 });
 
@@ -150,6 +149,7 @@ $(".modal-background").click(function() {
 });
 
 $("#clearBtn").click(function () {
+    deckArray = [];
     favArray = [];
     localStorage.clear();
     $('td').replaceWith('');
