@@ -116,20 +116,20 @@ function showFavorites(){
 //These are all the trigger events for the Card Array
 $(document).on("click", ".cardRecall", function() {
     cardName = $(this).attr("value");
-    displayCard(cardName)
+    displayCard(cardName);
 });
 
 $(document).on('click',".saveCardBtn", function (e) {
     cardName = $(this).attr("value");
     favArray.push(cardName);
-   localStorage.setItem('favArray', JSON.stringify(favArray))
+   localStorage.setItem('favArray', JSON.stringify(favArray));
 });
 
 //These are the trigger events related to currency conversion
 $(".currencySelect").change(function () {
     currencyCode = $(".currencySelect option:selected").attr("id");
     if ($('.converted').hasClass('convertpricestyle')) {
-        currencyConvert()
+        currencyConvert();
     } else {
         return;
     }
