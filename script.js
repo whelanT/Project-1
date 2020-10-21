@@ -20,6 +20,8 @@ function displayCard() {
         url: 'https://api.scryfall.com/cards/named?fuzzy=' + cardName,
         method: "GET"
     }).then(function (response) {
+        console.log('response:', response)
+
         cardName = response.name;
         cardImage = response.image_uris.border_crop;
         $('.cardFace').replaceWith('<img class="cardFace" src="' + cardImage + '">');
@@ -110,6 +112,7 @@ function showFavorites(){
         for (i = 0; i < myFavs.length; i++) {
         cardName = myFavs[i];
         createQuickCard(myFavs[i]); }
+        deckArray = favArray;
     } 
 }
 
